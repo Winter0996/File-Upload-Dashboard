@@ -1,13 +1,18 @@
-type ProgressBarProps = {
+interface ProgressBarProps {
   progress: number;
-};
+  status?: 'uploading' | 'completed' | 'error';
+}
 
-const ProgressBar = ({ progress }: ProgressBarProps) => {
+const ProgressBar: React.FC<ProgressBarProps> = ({ progress, status }) => {
+  let barColor = '#3b82f6'; // default blue
+  if (status === 'completed') barColor = '#10b981'; // green
+  if (status === 'error') barColor = '#ef4444'; // red
+
   return (
-    <div className="progressBar">
+    <div className="progress-bar-container">
       <div
-        className="progressFill"
-        style={{ width: `${progress}%` }}
+        className="progress-bar-fill"
+        style={{ width: `${progress}%`, backgroundColor: barColor }}
       />
     </div>
   );

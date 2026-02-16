@@ -1,279 +1,574 @@
-/* ===========================
-   Root & Global Styles
-=========================== */
-:root {
-  --warm-bg: #541212;          /* main warm red background */
-  --warm-bg-light: #6e1c1c;    /* slightly lighter for hover/overlay */
-  --card-bg: rgba(255, 255, 255, 0.05);
-  --card-bg-dark: rgba(255, 255, 255, 0.1);
-  --text-color: #fff;
-  --text-color-light: #ffdddd;
-  --success: #4caf50;
-  --warning: #ffcc00;
-  --error: #ff4444;
-  --button-bg: #ff8888;
-  --button-hover: #ffaaaa;
-  --toast-success: #4caf50;
-  --toast-error: #ff4444;
-}
-
-/* ===========================
-   Container & Layout
-=========================== */
-html, body {
+/* ===== GLOBAL RESET ===== */
+* {
   margin: 0;
   padding: 0;
-  font-family: 'Arial', sans-serif;
-  background-color: var(--warm-bg);
-  color: var(--text-color);
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  padding: 20px;
   box-sizing: border-box;
 }
 
-/* Center main heading */
-.container h1 {
-  text-align: center;
-  margin-bottom: 25px;
-  font-size: 2rem;
-  color: var(--text-color-light);
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
 }
 
-/* ===========================
-   Dark Mode
-=========================== */
-.dark {
-  --card-bg: rgba(0, 0, 0, 0.4);
-  --card-bg-dark: rgba(0,0,0,0.6);
-  --text-color: #fff;
-  --text-color-light: #ffdddd;
-  --button-bg: #ff5555;
-  --button-hover: #ff8888;
+.app {
+  min-height: 100vh;
+  background: #f8fafc;
 }
 
-/* ===========================
-   Buttons
-=========================== */
-button {
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+/* ===== NAVBAR ===== */
+.navbar {
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.darkModeBtn {
-  margin-bottom: 20px;
-  padding: 6px 14px;
-  background-color: var(--button-bg);
-  color: var(--warm-bg);
-}
-
-.darkModeBtn:hover {
-  background-color: var(--button-hover);
-}
-
-.deleteBtn {
-  margin-top: 10px;
-  padding: 5px 10px;
-  background-color: var(--error);
-  color: #fff;
-}
-
-.deleteBtn:hover {
-  background-color: #ff6666;
-}
-
-/* ===========================
-   Upload Zone
-=========================== */
-.uploadZone {
-  border: 2px dashed #fff;
-  border-radius: 12px;
-  padding: 35px 60px;
-  text-align: center;
-  cursor: pointer;
-  margin-bottom: 25px;
-  color: var(--text-color);
-  background-color: var(--card-bg);
-  transition: background-color 0.3s, border-color 0.3s;
-}
-
-.uploadZone:hover {
-  border-color: var(--button-bg);
-  background-color: var(--card-bg-dark);
-}
-
-/* ===========================
-   File List / Cards
-=========================== */
-.list {
-  width: 100%;
-  max-width: 900px;
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  padding: 15px 20px;
-  border-radius: 10px;
-  border: 1px solid #fff;
-  background-color: var(--card-bg);
-  color: var(--text-color);
-  transition: transform 0.2s, box-shadow 0.3s;
+  align-items: center;
 }
 
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #667eea;
+  font-weight: 700;
+  font-size: 1.5rem;
 }
 
-.errorCard {
-  border-color: var(--error);
-  background-color: rgba(255, 0, 0, 0.1);
+.brand-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* ===========================
-   Status Indicators
-=========================== */
-.statusIndicator {
-  margin-top: 5px;
-  font-weight: bold;
+.nav-user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-.statusIndicator .processing { color: var(--warning); }
-.statusIndicator .complete   { color: var(--success); }
-.statusIndicator .failed     { color: var(--error); }
-
-.errorText {
-  color: #ff7777;
-  margin-top: 5px;
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.1rem;
 }
 
-/* ===========================
-   Progress Bar
-=========================== */
-.progressBar {
+.user-name {
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.logout-btn {
+  padding: 0.5rem 1.25rem;
+  background: #f1f5f9;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logout-btn:hover {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+/* ===== LOGIN ===== */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.login-box {
+  background: white;
+  border-radius: 16px;
+  padding: 3rem;
   width: 100%;
-  height: 10px;
-  background-color: rgba(255,255,255,0.2);
-  border-radius: 6px;
-  overflow: hidden;
-  margin-top: 10px;
+  max-width: 420px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
-.progressBarFill {
-  height: 100%;
-  background-color: var(--success);
-  width: 0%;
-  transition: width 0.3s ease;
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
-/* ===========================
-   Toast Notifications
-=========================== */
-.toastContainer {
-  position: fixed;
-  top: 20px;
-  right: 20px;
+.login-header svg {
+  color: #667eea;
+  margin-bottom: 1rem;
+}
+
+.login-header h1 {
+  font-size: 2rem;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.login-header p {
+  color: #64748b;
+}
+
+.login-form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: #475569;
+  font-size: 0.9rem;
+}
+
+.form-group input {
+  padding: 0.75rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.login-submit {
+  padding: 0.875rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.login-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.demo-hint {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+/* ===== MAIN CONTENT ===== */
+.main-content {
+  padding: 3rem 2rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  color: #1e293b;
+  margin-bottom: 0.75rem;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: #64748b;
+}
+
+/* ===== UPLOAD ZONE ===== */
+.upload-zone {
+  background: white;
+  border: 3px dashed #cbd5e1;
+  border-radius: 16px;
+  padding: 4rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: 3rem;
+}
+
+.upload-zone:hover {
+  border-color: #667eea;
+  background: #f8faff;
+}
+
+.upload-zone.dragging {
+  border-color: #667eea;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  transform: scale(1.02);
+}
+
+.upload-zone svg {
+  color: #667eea;
+  margin-bottom: 1.5rem;
+}
+
+.upload-zone h3 {
+  font-size: 1.5rem;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.upload-zone p {
+  color: #64748b;
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+}
+
+.upload-hint {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #f1f5f9;
+  border-radius: 20px;
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+/* ===== FILES SECTION ===== */
+.files-section {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.section-header h2 {
+  font-size: 1.5rem;
+  color: #1e293b;
+}
+
+.file-count {
+  padding: 0.375rem 0.875rem;
+  background: #f1f5f9;
+  border-radius: 20px;
+  color: #64748b;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.files-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.empty-state svg {
+  color: #cbd5e1;
+  margin-bottom: 1.5rem;
+}
+
+.empty-state h3 {
+  color: #64748b;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+  color: #94a3b8;
+}
+
+/* ===== FILE CARD ===== */
+.file-card {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all 0.2s;
+}
+
+.file-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.file-card.completed {
+  border-color: #10b981;
+  background: #f0fdf4;
+}
+
+.file-card.error {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+.file-icon-large {
+  font-size: 3rem;
+  text-align: center;
+}
+
+.file-info {
+  flex: 1;
+}
+
+.file-name {
+  font-size: 1rem;
+  color: #1e293b;
+  margin-bottom: 0.25rem;
+  word-break: break-word;
+}
+
+.file-meta {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.file-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.progress-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #3b82f6;
+  text-align: right;
+}
+
+.file-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.status-text.success {
+  color: #10b981;
+}
+
+.status-text.error {
+  color: #ef4444;
+}
+
+.file-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.action-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+}
+
+.action-btn.delete {
+  color: #ef4444;
+}
+
+.action-btn.delete:hover {
+  background: #fee2e2;
+}
+
+.action-btn.retry {
+  color: #3b82f6;
+}
+
+.action-btn.retry:hover {
+  background: #dbeafe;
+}
+
+/* ===== PROGRESS BAR ===== */
+.progress-bar-container {
+  width: 100%;
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+  border-radius: 3px;
+}
+
+/* ===== TOAST ===== */
+.toast-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   z-index: 1000;
 }
 
 .toast {
-  padding: 10px 18px;
-  border-radius: 6px;
-  font-weight: bold;
-  color: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-  animation: fadeIn 0.3s ease;
-}
-
-.toast.success { background-color: var(--toast-success); }
-.toast.error   { background-color: var(--toast-error); }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ===========================
-   Mock Login Form
-=========================== */
-.loginForm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: var(--card-bg);
-  padding: 40px;
+  background: white;
   border-radius: 12px;
-  border: 1px solid #fff;
-  color: var(--text-color);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  min-width: 300px;
+  animation: slideIn 0.3s ease;
 }
 
-.loginForm input {
-  margin: 10px 0;
-  padding: 8px 12px;
-  border-radius: 6px;
+@keyframes slideIn {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.toast-success {
+  border-left: 4px solid #10b981;
+}
+
+.toast-error {
+  border-left: 4px solid #ef4444;
+}
+
+.toast-info {
+  border-left: 4px solid #3b82f6;
+}
+
+.toast-icon {
+  display: flex;
+  align-items: center;
+}
+
+.toast-success .toast-icon {
+  color: #10b981;
+}
+
+.toast-error .toast-icon {
+  color: #ef4444;
+}
+
+.toast-info .toast-icon {
+  color: #3b82f6;
+}
+
+.toast-message {
+  flex: 1;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.toast-close {
+  background: none;
   border: none;
-  width: 220px;
-  font-size: 1rem;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
 }
 
-.loginForm button {
-  margin-top: 10px;
-  padding: 8px 16px;
-  border-radius: 6px;
-  border: none;
-  background-color: var(--button-bg);
-  color: var(--warm-bg);
-  font-weight: bold;
+.toast-close:hover {
+  color: #64748b;
 }
 
-.loginForm button:hover {
-  background-color: var(--button-hover);
-}
-
-/* ===========================
-   Responsive
-=========================== */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-  .uploadZone {
-    padding: 30px 40px;
+  .nav-container {
+    padding: 1rem;
   }
 
-  .card {
-    padding: 12px 15px;
+  .user-name {
+    display: none;
   }
 
-  .loginForm input {
-    width: 180px;
+  .main-content {
+    padding: 2rem 1rem;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .files-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .toast-container {
+    left: 1rem;
+    right: 1rem;
+  }
+
+  .toast {
+    min-width: auto;
   }
 }
 
-@media (max-width: 480px) {
-  .uploadZone {
-    padding: 25px 20px;
-  }
-
-  .container h1 {
-    font-size: 1.5rem;
-  }
-
-  .card {
-    padding: 10px 12px;
-  }
 }

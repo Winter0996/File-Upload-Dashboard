@@ -1,55 +1,74 @@
-import React, { useRef } from "react";
+import React, { useState, useRef } from 'react';
 
-type UploadZoneProps = {
-  handleFiles: (files: FileList | null) => void;
-  acceptedTypes?: string[]; // e.g. ["image/png", "application/pdf"]
-  maxSizeMB?: number;       // max file size in MB
-};
+interface UploadZoneProps {
+  onFilesSelected: (files: File[]) => void;
+}
 
-const UploadZone = ({
-  handleFiles,
-  acceptedTypes = [],
-  maxSizeMB = 5,
-}: UploadZoneProps) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+const UploadZone: React.FC<UploadZoneProps> = ({ onFilesSelected }) => {
+  const [isDragging, setIsDragging] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Drag & Drop handler
-  const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
+  const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
-    handleFiles(e.dataTransfer.files);
+    setIsDragging(true);
   };
 
-  const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
+  const handleDragLeave = () => {
+    setIsDragging(false);
   };
 
-  // File input change handler
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleFiles(e.target.files);
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+    
+    const droppedFiles = Array.from(e.dataTransfer.files);
+    if (droppedFiles.length > 0) {
+      onFilesSelected(droppedFiles);
+    }
+  };
+
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFiles = Array.from(e.target.files || []);
+    if (selectedFiles.length > 0) {
+      onFilesSelected(selectedFiles);
+    }
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  const handleClick = () => {
+    fileInputRef.current?.click();
   };
 
   return (
     <div
-      className="uploadZone"
-      onDrop={onDrop}
-      onDragOver={onDragOver}
-      onClick={() => inputRef.current?.click()}
+      className={`upload-zone ${isDragging ? 'dragging' : ''}`}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+      onClick={handleClick}
     >
-      <p>Drag & Drop files here or click to select</p>
       <input
-        ref={inputRef}
+        ref={fileInputRef}
         type="file"
         multiple
-        onChange={onChange}
-        style={{ display: "none" }}
+        onChange={handleFileSelect}
+        className="file-input-hidden"
+        aria-label="File upload input"
       />
-      <small>
-        Max size: {maxSizeMB}MB | Accepted types:{" "}
-        {acceptedTypes.length > 0 ? acceptedTypes.join(", ") : "any"}
-      </small>
+      
+      <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <polyline points="17 8 12 3 7 8" />
+        <line x1="12" y1="3" x2="12" y2="15" />
+      </svg>
+      
+      <h3>{isDragging ? 'Drop files here' : 'Drag & drop files'}</h3>
+      <p>or click to browse</p>
+      <span className="upload-hint">Support for all file types</span>
     </div>
   );
 };
 
 export default UploadZone;
-
