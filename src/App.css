@@ -1,0 +1,279 @@
+/* ===========================
+   Root & Global Styles
+=========================== */
+:root {
+  --warm-bg: #541212;          /* main warm red background */
+  --warm-bg-light: #6e1c1c;    /* slightly lighter for hover/overlay */
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --card-bg-dark: rgba(255, 255, 255, 0.1);
+  --text-color: #fff;
+  --text-color-light: #ffdddd;
+  --success: #4caf50;
+  --warning: #ffcc00;
+  --error: #ff4444;
+  --button-bg: #ff8888;
+  --button-hover: #ffaaaa;
+  --toast-success: #4caf50;
+  --toast-error: #ff4444;
+}
+
+/* ===========================
+   Container & Layout
+=========================== */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: var(--warm-bg);
+  color: var(--text-color);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Center main heading */
+.container h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 2rem;
+  color: var(--text-color-light);
+}
+
+/* ===========================
+   Dark Mode
+=========================== */
+.dark {
+  --card-bg: rgba(0, 0, 0, 0.4);
+  --card-bg-dark: rgba(0,0,0,0.6);
+  --text-color: #fff;
+  --text-color-light: #ffdddd;
+  --button-bg: #ff5555;
+  --button-hover: #ff8888;
+}
+
+/* ===========================
+   Buttons
+=========================== */
+button {
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.darkModeBtn {
+  margin-bottom: 20px;
+  padding: 6px 14px;
+  background-color: var(--button-bg);
+  color: var(--warm-bg);
+}
+
+.darkModeBtn:hover {
+  background-color: var(--button-hover);
+}
+
+.deleteBtn {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: var(--error);
+  color: #fff;
+}
+
+.deleteBtn:hover {
+  background-color: #ff6666;
+}
+
+/* ===========================
+   Upload Zone
+=========================== */
+.uploadZone {
+  border: 2px dashed #fff;
+  border-radius: 12px;
+  padding: 35px 60px;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 25px;
+  color: var(--text-color);
+  background-color: var(--card-bg);
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.uploadZone:hover {
+  border-color: var(--button-bg);
+  background-color: var(--card-bg-dark);
+}
+
+/* ===========================
+   File List / Cards
+=========================== */
+.list {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px 20px;
+  border-radius: 10px;
+  border: 1px solid #fff;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.errorCard {
+  border-color: var(--error);
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+/* ===========================
+   Status Indicators
+=========================== */
+.statusIndicator {
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.statusIndicator .processing { color: var(--warning); }
+.statusIndicator .complete   { color: var(--success); }
+.statusIndicator .failed     { color: var(--error); }
+
+.errorText {
+  color: #ff7777;
+  margin-top: 5px;
+}
+
+/* ===========================
+   Progress Bar
+=========================== */
+.progressBar {
+  width: 100%;
+  height: 10px;
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.progressBarFill {
+  height: 100%;
+  background-color: var(--success);
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+/* ===========================
+   Toast Notifications
+=========================== */
+.toastContainer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.toast {
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: bold;
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+.toast.success { background-color: var(--toast-success); }
+.toast.error   { background-color: var(--toast-error); }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===========================
+   Mock Login Form
+=========================== */
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--card-bg);
+  padding: 40px;
+  border-radius: 12px;
+  border: 1px solid #fff;
+  color: var(--text-color);
+}
+
+.loginForm input {
+  margin: 10px 0;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  width: 220px;
+  font-size: 1rem;
+}
+
+.loginForm button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  background-color: var(--button-bg);
+  color: var(--warm-bg);
+  font-weight: bold;
+}
+
+.loginForm button:hover {
+  background-color: var(--button-hover);
+}
+
+/* ===========================
+   Responsive
+=========================== */
+@media (max-width: 768px) {
+  .uploadZone {
+    padding: 30px 40px;
+  }
+
+  .card {
+    padding: 12px 15px;
+  }
+
+  .loginForm input {
+    width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .uploadZone {
+    padding: 25px 20px;
+  }
+
+  .container h1 {
+    font-size: 1.5rem;
+  }
+
+  .card {
+    padding: 10px 12px;
+  }
+}
